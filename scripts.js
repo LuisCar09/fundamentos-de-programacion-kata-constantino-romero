@@ -34,33 +34,83 @@ const pregunta = {
     ]
 }
 
+let contenedor = document.getElementById("contenedorPreguntas")
 function imprimePregunta(pregunta) {
-  const newHTML = "";
+  let html = ''
+  let title = imprimeTitulo(pregunta);
+  let resp = imprimeTodasLasRespuestas(pregunta)
+  html += title;
+   
+  console.log(resp);
+ 
+  // contenedor.appendChild(resp)
 
-  newHTML += imprimeTitulo(pregunta);
-  newHTML += imprimeTodasLasRespuestas(pregunta);
+   resp.forEach((item)=>{
+    item.forEach(htmlElement =>{
+      contenedor.appendChild(htmlElement)
+    })
+   })
 
-  return newHTML;
 }
 
 function imprimeTitulo(pregunta) {
-  // Put your code here
+  let parrafo = document.createElement('p')
+  parrafo.textContent = pregunta.titulo
+  
+  return parrafo
 }
-
+imprimeTodasLasRespuestas(pregunta)
 function imprimeTodasLasRespuestas(pregunta) {
-  // Put your code here
+  
+  return pregunta.respuestas.map(respuesta => {
+    return imprimeUnaRespuesta(respuesta)
+  });
 }
 
 function imprimeUnaRespuesta(respuesta) {
-  // Put your code here
+  
+  
+  return [imprimeLabel(respuesta),imprimeInput(respuesta)]
 }
 
 function imprimeLabel(respuesta) {
-  // Put your code here
+  let label = document.createElement('label')
+  label.setAttribute('for',respuesta.id)
+  label.textContent = respuesta.label
+  
+  return label
 }
 
 function imprimeInput(respuesta) {
-  // Put your code here
+  let input = document.createElement('input')
+  input.setAttribute('id',respuesta.id)
+  input.setAttribute('type','radio')
+  input.setAttribute('name', respuesta.name)
+  input.setAttribute('value',respuesta.value)
+ 
+  return input
 }
 
-document.getElementById("contenedorPreguntas").innerHTML = imprimePregunta(pregunta);
+
+
+
+imprimePregunta(pregunta)
+
+
+// let label = document.createElement('label')
+  // let input = document.createElement('input')
+  // let response = ''
+  // pregunta.respuestas.forEach(respuesta => {
+  //   label.setAttribute('for',respuesta.id)
+  //   label.textContent = respuesta.label
+  //   input.setAttribute('id',respuesta.id)
+  //   input.setAttribute('type','radio')
+  //   input.setAttribute('name', respuesta.name)
+  //   input.setAttribute('value',respuesta.value)
+
+  //   response += label
+  //   response += input
+    
+  // });
+  
+  // return response
